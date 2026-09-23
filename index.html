@@ -1,140 +1,975 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a2744">
+<title>Thiệp Cưới – Minh Hoàng &amp; Hạnh Nguyên · 29.11.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-  body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
-  h1 { text-align: center; color: #1b3a5c; font-size: 22px; margin-bottom: 5px; }
-  .subtitle { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
-  .legend { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #444; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 2px solid transparent; transition: all 0.2s; user-select: none; }
-  .legend-item:hover { background: #eee; }
-  .legend-item.active { border-color: #1b3a5c; background: #e8eef5; font-weight: 600; }
-  .legend-box { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #ccc; }
-  .container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-  .notebook-card { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 14px; width: 420px; border-top: 4px solid #1b3a5c; transition: opacity 0.3s; }
-  .nb-title { font-weight: 700; color: #1b3a5c; font-size: 13px; margin-bottom: 10px; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; }
-  .section-label { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin: 8px 0 4px 0; }
-  .table-tag { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 4px; margin: 2px 2px; font-family: 'Consolas', monospace; word-break: break-all; transition: all 0.2s; cursor: pointer; }
-  .table-tag:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-  .upstream { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
-  .downstream { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
-  .internal { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
-  .ext-source { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-  .write-mode { display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 4px; background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; font-weight: 600; }
-  .dimmed { opacity: 0.15 !important; }
-  .highlighted { box-shadow: 0 0 0 3px #ff6f00 !important; transform: scale(1.08); z-index: 10; position: relative; }
-  .filter-hint { text-align: center; color: #999; font-size: 12px; margin-bottom: 8px; font-style: italic; min-height: 18px; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #2d3f6b;
+    --beige: #f7f3ee;
+    --beige-dark: #ede6db;
+    --beige-mid: #d4c9b8;
+    --cream: #faf8f5;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--navy);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100svh;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 80px 32px 100px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero-border {
+    position: absolute;
+    inset: 16px;
+    border: 1px solid var(--beige-mid);
+    pointer-events: none;
+  }
+
+  .hero-corner {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-color: var(--navy);
+    border-style: solid;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .hero-corner.tl { top: 28px; left: 28px; border-width: 1.5px 0 0 1.5px; }
+  .hero-corner.tr { top: 28px; right: 28px; border-width: 1.5px 1.5px 0 0; }
+  .hero-corner.bl { bottom: 28px; left: 28px; border-width: 0 0 1.5px 1.5px; }
+  .hero-corner.br { bottom: 28px; right: 28px; border-width: 0 1.5px 1.5px 0; }
+
+  .floral-bg {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.055;
+  }
+  .floral-bg.top-right { top: -10px; right: -10px; width: min(300px, 45vw); }
+  .floral-bg.bot-left  { bottom: -10px; left: -10px; width: min(260px, 40vw); transform: rotate(180deg); }
+
+  .hero-label {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(10px, 2.5vw, 12px);
+    letter-spacing: 0.35em;
+    color: var(--navy-light);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0.65;
+  }
+
+  .monogram {
+    width: 90px;
+    height: 90px;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    position: relative;
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+  .monogram::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 0.5px solid var(--navy);
+    border-radius: 50%;
+    opacity: 0.35;
+  }
+  .monogram-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+
+  .name-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 11vw, 64px);
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+  .name-amp {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 7vw, 38px);
+    font-style: italic;
+    color: var(--navy-light);
+    opacity: 0.5;
+    display: block;
+    margin: 10px 0;
+  }
+
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 24px auto;
+    width: min(260px, 70vw);
+  }
+  .divider-line { flex: 1; height: 0.5px; background: var(--beige-mid); }
+  .divider-dot { width: 5px; height: 5px; border: 1px solid var(--beige-mid); border-radius: 50%; flex-shrink: 0; }
+
+  .hero-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(13px, 3.5vw, 16px);
+    letter-spacing: 0.2em;
+    color: var(--navy);
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+  .hero-sub {
+    font-size: clamp(11px, 2.8vw, 13px);
+    letter-spacing: 0.15em;
+    color: var(--navy-light);
+    opacity: 0.5;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.35;
+    animation: bob 2.2s ease-in-out infinite;
+  }
+  .scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--navy);
+    font-family: 'EB Garamond', serif;
+  }
+  .scroll-arrow {
+    width: 16px;
+    height: 16px;
+    border-right: 1px solid var(--navy);
+    border-bottom: 1px solid var(--navy);
+    transform: rotate(45deg);
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(7px); }
+  }
+
+  /* ===== GENERAL SECTION ===== */
+  section {
+    padding: clamp(56px, 10vw, 88px) clamp(20px, 5vw, 48px);
+  }
+  .section-inner { max-width: 680px; margin: 0 auto; }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--navy-light);
+    opacity: 0.5;
+    margin-bottom: 14px;
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 7vw, 38px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 44px;
+    line-height: 1.2;
+  }
+
+  /* ===== LOVE STORY ===== */
+  .story-section { background: var(--beige); }
+
+  .timeline { display: flex; flex-direction: column; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 0.5px;
+    background: var(--beige-mid);
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr;
+    align-items: center;
+    margin-bottom: 52px;
+  }
+  .timeline-item:nth-child(odd)  .tl-content { grid-column: 1; text-align: right; padding-right: 28px; }
+  .timeline-item:nth-child(odd)  .tl-empty   { grid-column: 3; }
+  .timeline-item:nth-child(even) .tl-content { grid-column: 3; text-align: left; padding-left: 28px; }
+  .timeline-item:nth-child(even) .tl-empty   { grid-column: 1; }
+
+  .tl-node { grid-column: 2; display: flex; justify-content: center; z-index: 1; }
+  .tl-circle {
+    width: 38px; height: 38px;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    background: var(--beige);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--navy);
+    opacity: 0.75;
+  }
+
+  .tl-year {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--navy-light);
+    opacity: 0.5;
+    margin-bottom: 6px;
+    font-family: 'EB Garamond', serif;
+    text-transform: uppercase;
+  }
+  .tl-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 4vw, 21px);
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .tl-text {
+    font-size: clamp(13px, 3.2vw, 15px);
+    line-height: 1.72;
+    color: var(--navy-light);
+    opacity: 0.78;
+  }
+
+  /* ===== PHOTOS ===== */
+  .photos-section { background: var(--cream); }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .photo-grid .photo-frame:first-child { grid-column: 1 / -1; }
+
+  .photo-frame {
+    position: relative;
+    background: var(--beige);
+    border: 1px solid var(--beige-mid);
+    overflow: hidden;
+  }
+  .photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border: 0.5px solid var(--beige-mid);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.6;
+  }
+  .frame-label {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(247,243,238,0.9);
+    padding: 4px 16px;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0.65;
+    white-space: nowrap;
+    z-index: 3;
+    font-family: 'EB Garamond', serif;
+  }
+
+  .photo-frame input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+  }
+
+  .photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px 16px;
+    color: var(--navy-light);
+    opacity: 0.35;
+    aspect-ratio: 4/3;
+  }
+  .photo-frame:first-child .photo-placeholder { aspect-ratio: 16/7; }
+
+  .photo-placeholder svg { flex-shrink: 0; }
+  .photo-placeholder p {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'EB Garamond', serif;
+    text-align: center;
+  }
+
+  .photo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+  .photo-frame:first-child { min-height: 180px; }
+  .photo-frame:not(:first-child) { min-height: 140px; }
+
+  /* ===== SCHEDULE ===== */
+  .schedule-section { background: var(--navy); }
+  .schedule-section .section-tag { color: var(--gold-light); opacity: 0.55; }
+  .schedule-section .section-title { color: var(--cream); }
+
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .schedule-card {
+    background: rgba(26,39,68,0.55);
+    padding: clamp(20px, 5vw, 32px) clamp(16px, 4vw, 28px);
+    position: relative;
+    overflow: hidden;
+  }
+  .schedule-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1.5px;
+    background: var(--gold);
+    opacity: 0.35;
+  }
+  .schedule-card.featured { grid-column: 1 / -1; }
+
+  .schedule-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .sch-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.55;
+    margin-bottom: 8px;
+    font-family: 'EB Garamond', serif;
+  }
+  .sch-event {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 5vw, 23px);
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .schedule-card.featured .sch-event { font-size: clamp(22px, 6vw, 30px); }
+
+  .sch-date { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; margin-bottom: 4px; }
+  .date-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(13px, 3.5vw, 16px);
+    color: var(--gold-light);
+  }
+  .date-lunar {
+    font-size: 11px;
+    color: var(--cream);
+    opacity: 0.4;
+    letter-spacing: 0.08em;
+    font-family: 'EB Garamond', serif;
+  }
+  .sch-time {
+    font-size: 13px;
+    color: var(--cream);
+    opacity: 0.5;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .sch-place {
+    font-size: clamp(12px, 3vw, 14px);
+    color: var(--gold-light);
+    opacity: 0.65;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ===== VENUE ===== */
+  .venue-section { background: var(--beige); }
+
+  .venue-card {
+    border: 1px solid var(--beige-mid);
+    background: var(--white);
+    padding: clamp(32px, 7vw, 52px) clamp(24px, 6vw, 48px);
+    text-align: center;
+    position: relative;
+  }
+  .venue-card::before {
+    content: '';
+    position: absolute;
+    top: 16px; left: 16px;
+    width: 44px; height: 44px;
+    border-top: 1px solid var(--navy);
+    border-left: 1px solid var(--navy);
+    opacity: 0.12;
+  }
+  .venue-card::after {
+    content: '';
+    position: absolute;
+    bottom: 16px; right: 16px;
+    width: 44px; height: 44px;
+    border-bottom: 1px solid var(--navy);
+    border-right: 1px solid var(--navy);
+    opacity: 0.12;
+  }
+
+  .venue-icon { margin-bottom: 20px; color: var(--navy); opacity: 0.35; }
+  .venue-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 5.5vw, 30px);
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .venue-address {
+    font-size: clamp(13px, 3.2vw, 15px);
+    color: var(--navy-light);
+    opacity: 0.62;
+    line-height: 1.65;
+    font-family: 'EB Garamond', serif;
+    margin-bottom: 28px;
+  }
+  .venue-details {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(20px, 5vw, 44px);
+    border-top: 0.5px solid var(--beige-mid);
+    padding-top: 24px;
+  }
+  .venue-detail-item { text-align: center; }
+  .vd-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--navy-light);
+    opacity: 0.5;
+    margin-bottom: 6px;
+    font-family: 'EB Garamond', serif;
+  }
+  .vd-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 3.5vw, 17px);
+    color: var(--navy);
+  }
+
+  /* ===== RSVP ===== */
+  .rsvp-section { background: var(--cream); text-align: center; }
+
+  .rsvp-box {
+    border: 1px solid var(--beige-mid);
+    padding: clamp(36px, 8vw, 56px) clamp(24px, 6vw, 48px);
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .rsvp-text {
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 1.82;
+    color: var(--navy-light);
+    opacity: 0.72;
+    margin-bottom: 32px;
+    font-family: 'EB Garamond', serif;
+  }
+  .rsvp-text strong { font-weight: 500; color: var(--navy); opacity: 1; }
+
+  .rsvp-contacts {
+    display: flex;
+    justify-content: center;
+    gap: clamp(20px, 5vw, 40px);
+    flex-wrap: wrap;
+    border-top: 0.5px solid var(--beige-mid);
+    padding-top: 24px;
+    margin-top: 8px;
+  }
+  .rsvp-contact { text-align: center; }
+  .rc-label {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--navy-light);
+    opacity: 0.45;
+    margin-bottom: 5px;
+    font-family: 'EB Garamond', serif;
+  }
+  .rc-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--navy);
+    opacity: 0.8;
+  }
+  .rc-value a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy);
+    padding: clamp(44px, 8vw, 64px) 32px;
+    text-align: center;
+  }
+  .footer-monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--cream);
+    opacity: 0.2;
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+  .footer-text {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.4;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* ===== FADE IN ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE: MOBILE ===== */
+  @media (max-width: 520px) {
+    .timeline::before { display: none; }
+    .timeline-item {
+      grid-template-columns: 48px 1fr;
+      margin-bottom: 36px;
+    }
+    .timeline-item:nth-child(odd) .tl-content,
+    .timeline-item:nth-child(even) .tl-content {
+      grid-column: 2;
+      text-align: left;
+      padding: 0 0 0 16px;
+    }
+    .tl-node { grid-column: 1; }
+    .tl-empty { display: none; }
+
+    .photo-grid { grid-template-columns: 1fr; }
+    .photo-grid .photo-frame:first-child { grid-column: 1; }
+
+    .schedule-grid { grid-template-columns: 1fr; }
+    .schedule-card.featured { grid-column: 1; }
+
+    .venue-details { gap: 18px; }
+  }
 </style>
 </head>
 <body>
-<h1>Loyalty Base Scheme MVP3 &mdash; Pipeline Lineage (NB2&rarr;NB4&rarr;NB6&rarr;NB8)</h1>
-<p class="subtitle">4 notebooks &bull; 8 external sources &bull; 5 staging tables &bull; 3 output tables &bull; Updated 2026-07-27</p>
 
-<div class="legend" id="legend">
-  <div class="legend-item" data-filter="ext-source" onclick="toggleFilter(this)"><div class="legend-box" style="background:#e8f5e9;"></div>External Source</div>
-  <div class="legend-item" data-filter="upstream" onclick="toggleFilter(this)"><div class="legend-box" style="background:#e3f2fd;"></div>Upstream (same schema)</div>
-  <div class="legend-item" data-filter="downstream" onclick="toggleFilter(this)"><div class="legend-box" style="background:#fce4ec;"></div>Downstream (write)</div>
-  <div class="legend-item" data-filter="internal" onclick="toggleFilter(this)"><div class="legend-box" style="background:#f3e5f5;"></div>Internal (NB output &rarr; next NB input)</div>
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-border"></div>
+  <div class="hero-corner tl"></div>
+  <div class="hero-corner tr"></div>
+  <div class="hero-corner bl"></div>
+  <div class="hero-corner br"></div>
+
+  <svg class="floral-bg top-right" viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M150 20 C150 20 110 65 70 78 C30 91 10 130 22 172 C34 214 76 232 118 220 C160 208 178 166 166 124 C154 82 150 20 150 20Z" fill="#1a2744"/>
+    <ellipse cx="96" cy="80" rx="24" ry="36" transform="rotate(-30 96 80)" fill="#1a2744" opacity="0.7"/>
+    <ellipse cx="172" cy="148" rx="19" ry="29" transform="rotate(20 172 148)" fill="#1a2744" opacity="0.6"/>
+    <ellipse cx="78" cy="168" rx="20" ry="30" transform="rotate(-12 78 168)" fill="#1a2744" opacity="0.65"/>
+    <circle cx="148" cy="105" r="7" fill="#1a2744" opacity="0.8"/>
+    <circle cx="108" cy="135" r="5" fill="#1a2744" opacity="0.7"/>
+    <path d="M88 55 Q128 35 158 75" stroke="#1a2744" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M55 105 Q46 135 65 155" stroke="#1a2744" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M130 180 Q160 200 178 180" stroke="#1a2744" stroke-width="1" fill="none" opacity="0.5"/>
+  </svg>
+  <svg class="floral-bg bot-left" viewBox="0 0 280 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M140 20 C140 20 104 60 68 72 C32 84 14 120 24 160 C34 200 72 216 110 205 C148 194 164 155 154 116 C144 77 140 20 140 20Z" fill="#1a2744"/>
+    <ellipse cx="88" cy="74" rx="21" ry="31" transform="rotate(-25 88 74)" fill="#1a2744" opacity="0.7"/>
+    <ellipse cx="158" cy="136" rx="18" ry="27" transform="rotate(18 158 136)" fill="#1a2744" opacity="0.65"/>
+    <circle cx="128" cy="96" r="6" fill="#1a2744" opacity="0.8"/>
+  </svg>
+
+  <p class="hero-label fade-in">Trân trọng kính mời</p>
+
+  <div class="monogram fade-in">
+    <span class="monogram-text">MH</span>
+  </div>
+
+  <div class="fade-in">
+    <div class="name-main">Minh Hoàng</div>
+    <span class="name-amp">&amp;</span>
+    <div class="name-main">Hạnh Nguyên</div>
+  </div>
+
+  <div class="divider-ornament fade-in">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="fade-in">
+    <p class="hero-date">Chủ Nhật &nbsp;·&nbsp; 29 · 11 · 2026</p>
+    <p class="hero-sub">Ngày 21 tháng 10 Âm lịch</p>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Cuộn xuống</span>
+    <div class="scroll-arrow"></div>
+  </div>
 </div>
-<div class="filter-hint" id="filterHint"></div>
 
-<div class="container" id="container">
+<!-- ===== LOVE STORY ===== -->
+<section class="story-section" id="story">
+  <div class="section-inner">
+    <p class="section-tag fade-in">Hành trình của chúng tôi</p>
+    <h2 class="section-title fade-in">Câu chuyện tình yêu</h2>
 
-  <!-- NB2 -->
-  <div class="notebook-card">
-    <div class="nb-title">NB2: etl_staging_daily <span class="write-mode">DELETE+INSERT</span></div>
-    <div style="font-size:11px;color:#555;margin-bottom:8px;">Daily staging: QR payment, bill payment, QR merchant, gamification, earn/burn</div>
-    <div class="section-label">Upstream (READ) &mdash; External</div>
-    <span class="table-tag ext-source">curated_priv.domain_data.casa_transaction_rbg_gra</span>
-    <span class="table-tag ext-source">standardized_priv.loyalty.loyalty_transaction_history</span>
-    <span class="table-tag ext-source">standardized_priv.loyalty.loyalty_gami_transaction</span>
-    <span class="table-tag ext-source">curated_priv.domain_data.customer_loyalty_gra</span>
-    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_event_all</span>
-    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_transaction</span>
-    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_transaction_refund</span>
-    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_customer</span>
-    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_eligible_customer</span>
-    <div class="section-label">Downstream (WRITE)</div>
-    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_qr_payment_daily</span>
-    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_bill_payment_daily</span>
-    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_qr_merchant_daily</span>
-    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_gami_txn</span>
-    <span class="table-tag downstream">fin_bf_rah.binhln_f_loyalty_earn_burn_daily</span>
+    <div class="timeline">
+      <div class="timeline-item fade-in">
+        <div class="tl-content">
+          <p class="tl-year">[Năm gặp nhau]</p>
+          <h3 class="tl-heading">Lần đầu gặp gỡ</h3>
+          <p class="tl-text">[Chúng tôi gặp nhau lần đầu tại... Khoảnh khắc đó, một điều gì đó thật đặc biệt đã bắt đầu.]</p>
+        </div>
+        <div class="tl-node"><div class="tl-circle">❀</div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="tl-empty"></div>
+        <div class="tl-node"><div class="tl-circle">♡</div></div>
+        <div class="tl-content">
+          <p class="tl-year">[Năm hẹn hò]</p>
+          <h3 class="tl-heading">Ngày yêu nhau</h3>
+          <p class="tl-text">[Sau những tháng ngày thân thiết, chúng tôi chính thức nên đôi vào một ngày thật đẹp...]</p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="tl-content">
+          <p class="tl-year">[Năm cầu hôn]</p>
+          <h3 class="tl-heading">Lời cầu hôn</h3>
+          <p class="tl-text">[Tại..., anh đã nắm tay em và hỏi: "Em có muốn cùng anh đi trọn cuộc đời không?"]</p>
+        </div>
+        <div class="tl-node"><div class="tl-circle">◇</div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="tl-empty"></div>
+        <div class="tl-node"><div class="tl-circle">★</div></div>
+        <div class="tl-content">
+          <p class="tl-year">2026</p>
+          <h3 class="tl-heading">Ngày về chung nhà</h3>
+          <p class="tl-text">Ngày 29 tháng 11 năm 2026, chúng tôi sẽ cùng nhau bước sang trang mới đẹp nhất của cuộc đời.</p>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <!-- NB4 -->
-  <div class="notebook-card">
-    <div class="nb-title">NB4: etl_dim_cus <span class="write-mode">DELETE+INSERT</span></div>
-    <div style="font-size:11px;color:#555;margin-bottom:8px;">Customer dimension: TA list + NTB, txn buckets, earn/burn, CASA, gami, status</div>
-    <div class="section-label">Upstream (READ) &mdash; Internal from NB2</div>
-    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_payment_daily</span>
-    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_bill_payment_daily</span>
-    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_merchant_daily</span>
-    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_gami_txn</span>
-    <span class="table-tag internal">fin_bf_rah.binhln_f_loyalty_earn_burn_daily</span>
-    <div class="section-label">Upstream (READ) &mdash; External / Same Schema</div>
-    <span class="table-tag ext-source">user_workbench_rmd_priv.prj_e2m3.f_cus360_rbg_daily_customer_profile</span>
-    <span class="table-tag upstream">fin_bf_rah.rbg_f_daily_customer_status</span>
-    <span class="table-tag upstream">fin_bf_rah.rbg_d_daily_customer_demographic</span>
-    <span class="table-tag upstream">fin_bf_rah.d_loyalty_bs_2026_customer_ta_mvp3_jul2026</span>
-    <span class="table-tag ext-source">curated_priv.domain_data.customer_loyalty_gra</span>
-    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_eligible_customer</span>
-    <span class="table-tag ext-source">user_workbench_rbg_priv.dna_rbg_extraction_internal.basescheme_mvp3_jul2026</span>
-    <span class="table-tag ext-source">user_workbench_rbg_priv.dna_rbg_extraction_internal.basescheme_mvp3_jul2026_merchant_inflow</span>
-    <div class="section-label">Downstream (WRITE)</div>
-    <span class="table-tag downstream">fin_bf_rah.rbg_d_loyalty_bs_2026_customer_daily_mvp3</span>
+<!-- ===== PHOTO FRAMES ===== -->
+<section class="photos-section" id="photos">
+  <div class="section-inner">
+    <p class="section-tag fade-in">Hình ảnh kỷ niệm</p>
+    <h2 class="section-title fade-in">Ký ức của chúng tôi</h2>
+
+    <div class="photo-grid fade-in">
+      <!-- Frame 1 -->
+      <div class="photo-frame" id="frame1">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'frame1')" title="Chọn ảnh chính">
+        <div class="photo-placeholder">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none">
+            <rect x="1" y="1" width="28" height="22" rx="2" stroke="currentColor" stroke-width="1"/>
+            <circle cx="15" cy="12" r="5" stroke="currentColor" stroke-width="1"/>
+            <circle cx="23" cy="5" r="2" fill="currentColor" opacity="0.5"/>
+          </svg>
+          <p>Nhấn để chọn ảnh đôi chính</p>
+        </div>
+        <span class="frame-label">Minh Hoàng &amp; Hạnh Nguyên</span>
+      </div>
+
+      <!-- Frame 2 -->
+      <div class="photo-frame" id="frame2">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'frame2')" title="Chọn ảnh kỷ niệm 2">
+        <div class="photo-placeholder">
+          <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+            <rect x="1" y="1" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1"/>
+            <circle cx="14" cy="11" r="4" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          <p>Ảnh kỷ niệm 2</p>
+        </div>
+        <span class="frame-label">Kỷ niệm</span>
+      </div>
+
+      <!-- Frame 3 -->
+      <div class="photo-frame" id="frame3">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'frame3')" title="Chọn ảnh kỷ niệm 3">
+        <div class="photo-placeholder">
+          <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+            <rect x="1" y="1" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1"/>
+            <circle cx="14" cy="11" r="4" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          <p>Ảnh kỷ niệm 3</p>
+        </div>
+        <span class="frame-label">Kỷ niệm</span>
+      </div>
+
+      <!-- Frame 4 -->
+      <div class="photo-frame" id="frame4">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'frame4')" title="Chọn ảnh kỷ niệm 4">
+        <div class="photo-placeholder">
+          <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+            <rect x="1" y="1" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1"/>
+            <circle cx="14" cy="11" r="4" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          <p>Ảnh kỷ niệm 4</p>
+        </div>
+        <span class="frame-label">Kỷ niệm</span>
+      </div>
+    </div>
   </div>
+</section>
 
-  <!-- NB6 -->
-  <div class="notebook-card">
-    <div class="nb-title">NB6: etl_funnel <span class="write-mode">DELETE+INSERT</span></div>
-    <div style="font-size:11px;color:#555;margin-bottom:8px;">Funnel fact: aggregates dim table by bucket/group for dashboard consumption</div>
-    <div class="section-label">Upstream (READ) &mdash; Internal from NB4</div>
-    <span class="table-tag internal">fin_bf_rah.rbg_d_loyalty_bs_2026_customer_daily_mvp3</span>
-    <div class="section-label">Upstream (READ) &mdash; Internal from NB2</div>
-    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_payment_daily</span>
-    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_bill_payment_daily</span>
-    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_merchant_daily</span>
-    <div class="section-label">Downstream (WRITE)</div>
-    <span class="table-tag downstream">fin_bf_rah.rbg_f_funnel_mvp3</span>
+<!-- ===== SCHEDULE ===== -->
+<section class="schedule-section" id="schedule">
+  <div class="section-inner">
+    <p class="section-tag fade-in">Lịch trình</p>
+    <h2 class="section-title fade-in" style="color:var(--cream)">Các nghi lễ</h2>
+
+    <div class="schedule-grid fade-in">
+      <div class="schedule-card">
+        <span class="schedule-num" aria-hidden="true">01</span>
+        <p class="sch-label">Lễ thứ nhất</p>
+        <h3 class="sch-event">Lễ Dạm Ngõ</h3>
+        <div class="sch-date">
+          <span class="date-main">Thứ Năm, 07 / 05 / 2026</span>
+          <span class="date-lunar">21 tháng 4 ÂL</span>
+        </div>
+        <p class="sch-time">11:10</p>
+        <p class="sch-place">[Địa điểm – sẽ cập nhật]</p>
+      </div>
+
+      <div class="schedule-card">
+        <span class="schedule-num" aria-hidden="true">02</span>
+        <p class="sch-label">Lễ thứ hai</p>
+        <h3 class="sch-event">Lễ Ăn Hỏi</h3>
+        <div class="sch-date">
+          <span class="date-main">Thứ Ba, 17 / 11 / 2026</span>
+          <span class="date-lunar">09 tháng 10 ÂL</span>
+        </div>
+        <p class="sch-time">Giờ – sẽ cập nhật</p>
+        <p class="sch-place">[Địa điểm – sẽ cập nhật]</p>
+      </div>
+
+      <div class="schedule-card">
+        <span class="schedule-num" aria-hidden="true">03</span>
+        <p class="sch-label">Lễ thứ ba</p>
+        <h3 class="sch-event">Đăng Ký Kết Hôn</h3>
+        <div class="sch-date">
+          <span class="date-main">Thứ Tư, 18 / 11 / 2026</span>
+          <span class="date-lunar">08 tháng 10 ÂL</span>
+        </div>
+        <p class="sch-time">11:00 – 11:30</p>
+        <p class="sch-place">[UBND phường / xã – sẽ cập nhật]</p>
+      </div>
+
+      <div class="schedule-card">
+        <span class="schedule-num" aria-hidden="true">04</span>
+        <p class="sch-label">Lễ thứ tư</p>
+        <h3 class="sch-event">Lễ Đón Dâu</h3>
+        <div class="sch-date">
+          <span class="date-main">Thứ Bảy, 28 / 11 / 2026</span>
+          <span class="date-lunar">20 tháng 10 ÂL</span>
+        </div>
+        <p class="sch-time">11:00 – 15:00</p>
+        <p class="sch-place">[Địa điểm – sẽ cập nhật]</p>
+      </div>
+
+      <div class="schedule-card featured">
+        <span class="schedule-num" aria-hidden="true">05</span>
+        <p class="sch-label">Sự kiện chính</p>
+        <h3 class="sch-event">Tiệc Cưới</h3>
+        <div class="sch-date">
+          <span class="date-main" style="font-size:clamp(15px,4vw,20px)">Chủ Nhật, 29 / 11 / 2026</span>
+          <span class="date-lunar">21 tháng 10 ÂL</span>
+        </div>
+        <p class="sch-time" style="font-size:15px;opacity:0.65">10:00 – 14:00</p>
+        <p class="sch-place" style="font-size:clamp(13px,3.5vw,16px)">[Tên nhà hàng / Khách sạn] &nbsp;·&nbsp; [Phòng tiệc]</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <!-- NB8 -->
-  <div class="notebook-card">
-    <div class="nb-title">NB8: final_output <span class="write-mode">DELETE+INSERT</span></div>
-    <div style="font-size:11px;color:#555;margin-bottom:8px;">PBI-ready fact: pivots dim table into 24 view_mode configs for dashboard</div>
-    <div class="section-label">Upstream (READ) &mdash; Internal from NB4</div>
-    <span class="table-tag internal">fin_bf_rah.rbg_d_loyalty_bs_2026_customer_daily_mvp3</span>
-    <div class="section-label">Upstream (READ) &mdash; Internal from NB6</div>
-    <span class="table-tag internal">fin_bf_rah.rbg_f_funnel_mvp3</span>
-    <div class="section-label">Downstream (WRITE)</div>
-    <span class="table-tag downstream">fin_bf_rah.rbg_f_loyalty_mvp3</span>
+<!-- ===== VENUE ===== -->
+<section class="venue-section" id="venue">
+  <div class="section-inner">
+    <p class="section-tag fade-in">Địa điểm</p>
+    <h2 class="section-title fade-in">Phòng tiệc cưới</h2>
+    <div class="venue-card fade-in">
+      <div class="venue-icon">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <path d="M15 3 C9.5 3 5 7.6 5 13.2 C5 20.8 15 28 15 28 C15 28 25 20.8 25 13.2 C25 7.6 20.5 3 15 3Z" stroke="currentColor" stroke-width="1" fill="none"/>
+          <circle cx="15" cy="13" r="3.5" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <h3 class="venue-name">[Tên nhà hàng / Khách sạn]</h3>
+      <p class="venue-address">[Địa chỉ đầy đủ]<br>Hà Nội, Việt Nam</p>
+      <div class="venue-details">
+        <div class="venue-detail-item">
+          <p class="vd-label">Ngày</p>
+          <p class="vd-value">29 · 11 · 2026</p>
+        </div>
+        <div class="venue-detail-item">
+          <p class="vd-label">Giờ đón khách</p>
+          <p class="vd-value">10:00 sáng</p>
+        </div>
+        <div class="venue-detail-item">
+          <p class="vd-label">Phòng tiệc</p>
+          <p class="vd-value">[Tên phòng]</p>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-</div>
+<!-- ===== RSVP ===== -->
+<section class="rsvp-section" id="rsvp">
+  <div class="section-inner">
+    <p class="section-tag fade-in">Xác nhận tham dự</p>
+    <h2 class="section-title fade-in">Chúng tôi chờ đón bạn</h2>
+    <div class="rsvp-box fade-in">
+      <p class="rsvp-text">
+        Sự hiện diện của bạn là món quà quý giá nhất với chúng tôi.<br>
+        Xin vui lòng xác nhận trước ngày <strong>15 · 11 · 2026</strong>.
+      </p>
+      <div class="rsvp-contacts">
+        <div class="rsvp-contact">
+          <p class="rc-label">Chú rể</p>
+          <p class="rc-value"><a href="tel:+84000000000">Minh Hoàng<br>[SĐT]</a></p>
+        </div>
+        <div class="rsvp-contact">
+          <p class="rc-label">Cô dâu</p>
+          <p class="rc-value"><a href="tel:+84000000000">Hạnh Nguyên<br>[SĐT]</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-monogram">MH &amp; HN</div>
+  <p class="footer-text">29 · 11 · 2026 &nbsp;·&nbsp; Mãi mãi bên nhau</p>
+</footer>
 
 <script>
-let activeFilter = null;
-function toggleFilter(el) {
-  const filter = el.dataset.filter;
-  const items = document.querySelectorAll('.legend-item');
-  const tags = document.querySelectorAll('.table-tag');
-  if (activeFilter === filter) {
-    activeFilter = null;
-    items.forEach(i => i.classList.remove('active'));
-    tags.forEach(t => { t.classList.remove('dimmed'); t.classList.remove('highlighted'); });
-    document.getElementById('filterHint').textContent = '';
-  } else {
-    activeFilter = filter;
-    items.forEach(i => i.classList.toggle('active', i.dataset.filter === filter));
-    tags.forEach(t => {
-      if (t.classList.contains(filter)) { t.classList.remove('dimmed'); t.classList.add('highlighted'); }
-      else { t.classList.add('dimmed'); t.classList.remove('highlighted'); }
+  // Fade-in observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+      }
     });
-    document.getElementById('filterHint').textContent = 'Showing: ' + filter.replace('-', ' ');
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Trigger hero items immediately
+  document.querySelectorAll('.hero .fade-in').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 200 + i * 180);
+  });
+
+  // Photo upload
+  function loadPhoto(input, frameId) {
+    if (!input.files || !input.files[0]) return;
+    const frame = document.getElementById(frameId);
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      let img = frame.querySelector('.photo-preview');
+      if (!img) {
+        img = document.createElement('img');
+        img.className = 'photo-preview';
+        frame.appendChild(img);
+      }
+      img.src = e.target.result;
+      const ph = frame.querySelector('.photo-placeholder');
+      if (ph) ph.style.opacity = '0';
+    };
+    reader.readAsDataURL(input.files[0]);
   }
-}
 </script>
 </body>
 </html>
