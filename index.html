@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
+  h1 { text-align: center; color: #1b3a5c; font-size: 22px; margin-bottom: 5px; }
+  .subtitle { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
+  .legend { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #444; cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 2px solid transparent; transition: all 0.2s; user-select: none; }
+  .legend-item:hover { background: #eee; }
+  .legend-item.active { border-color: #1b3a5c; background: #e8eef5; font-weight: 600; }
+  .legend-box { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #ccc; }
+  .container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+  .notebook-card { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 14px; width: 420px; border-top: 4px solid #1b3a5c; transition: opacity 0.3s; }
+  .nb-title { font-weight: 700; color: #1b3a5c; font-size: 13px; margin-bottom: 10px; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; }
+  .section-label { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin: 8px 0 4px 0; }
+  .table-tag { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 4px; margin: 2px 2px; font-family: 'Consolas', monospace; word-break: break-all; transition: all 0.2s; cursor: pointer; }
+  .table-tag:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+  .upstream { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+  .downstream { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+  .internal { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+  .ext-source { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .write-mode { display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 4px; background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; font-weight: 600; }
+  .dimmed { opacity: 0.15 !important; }
+  .highlighted { box-shadow: 0 0 0 3px #ff6f00 !important; transform: scale(1.08); z-index: 10; position: relative; }
+  .filter-hint { text-align: center; color: #999; font-size: 12px; margin-bottom: 8px; font-style: italic; min-height: 18px; }
+</style>
+</head>
+<body>
+<h1>Loyalty Base Scheme MVP3 &mdash; Pipeline Lineage (NB2&rarr;NB4&rarr;NB6&rarr;NB8)</h1>
+<p class="subtitle">4 notebooks &bull; 8 external sources &bull; 5 staging tables &bull; 3 output tables &bull; Updated 2026-07-27</p>
+
+<div class="legend" id="legend">
+  <div class="legend-item" data-filter="ext-source" onclick="toggleFilter(this)"><div class="legend-box" style="background:#e8f5e9;"></div>External Source</div>
+  <div class="legend-item" data-filter="upstream" onclick="toggleFilter(this)"><div class="legend-box" style="background:#e3f2fd;"></div>Upstream (same schema)</div>
+  <div class="legend-item" data-filter="downstream" onclick="toggleFilter(this)"><div class="legend-box" style="background:#fce4ec;"></div>Downstream (write)</div>
+  <div class="legend-item" data-filter="internal" onclick="toggleFilter(this)"><div class="legend-box" style="background:#f3e5f5;"></div>Internal (NB output &rarr; next NB input)</div>
+</div>
+<div class="filter-hint" id="filterHint"></div>
+
+<div class="container" id="container">
+
+  <!-- NB2 -->
+  <div class="notebook-card">
+    <div class="nb-title">NB2: etl_staging_daily <span class="write-mode">DELETE+INSERT</span></div>
+    <div style="font-size:11px;color:#555;margin-bottom:8px;">Daily staging: QR payment, bill payment, QR merchant, gamification, earn/burn</div>
+    <div class="section-label">Upstream (READ) &mdash; External</div>
+    <span class="table-tag ext-source">curated_priv.domain_data.casa_transaction_rbg_gra</span>
+    <span class="table-tag ext-source">standardized_priv.loyalty.loyalty_transaction_history</span>
+    <span class="table-tag ext-source">standardized_priv.loyalty.loyalty_gami_transaction</span>
+    <span class="table-tag ext-source">curated_priv.domain_data.customer_loyalty_gra</span>
+    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_event_all</span>
+    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_transaction</span>
+    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_transaction_refund</span>
+    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_customer</span>
+    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_eligible_customer</span>
+    <div class="section-label">Downstream (WRITE)</div>
+    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_qr_payment_daily</span>
+    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_bill_payment_daily</span>
+    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_qr_merchant_daily</span>
+    <span class="table-tag downstream">fin_bf_rah.stg_loyalty_bs_2026_gami_txn</span>
+    <span class="table-tag downstream">fin_bf_rah.binhln_f_loyalty_earn_burn_daily</span>
+  </div>
+
+  <!-- NB4 -->
+  <div class="notebook-card">
+    <div class="nb-title">NB4: etl_dim_cus <span class="write-mode">DELETE+INSERT</span></div>
+    <div style="font-size:11px;color:#555;margin-bottom:8px;">Customer dimension: TA list + NTB, txn buckets, earn/burn, CASA, gami, status</div>
+    <div class="section-label">Upstream (READ) &mdash; Internal from NB2</div>
+    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_payment_daily</span>
+    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_bill_payment_daily</span>
+    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_merchant_daily</span>
+    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_gami_txn</span>
+    <span class="table-tag internal">fin_bf_rah.binhln_f_loyalty_earn_burn_daily</span>
+    <div class="section-label">Upstream (READ) &mdash; External / Same Schema</div>
+    <span class="table-tag ext-source">user_workbench_rmd_priv.prj_e2m3.f_cus360_rbg_daily_customer_profile</span>
+    <span class="table-tag upstream">fin_bf_rah.rbg_f_daily_customer_status</span>
+    <span class="table-tag upstream">fin_bf_rah.rbg_d_daily_customer_demographic</span>
+    <span class="table-tag upstream">fin_bf_rah.d_loyalty_bs_2026_customer_ta_mvp3_jul2026</span>
+    <span class="table-tag ext-source">curated_priv.domain_data.customer_loyalty_gra</span>
+    <span class="table-tag ext-source">insight_retail_priv.ps2.ps2_loyalty_eligible_customer</span>
+    <span class="table-tag ext-source">user_workbench_rbg_priv.dna_rbg_extraction_internal.basescheme_mvp3_jul2026</span>
+    <span class="table-tag ext-source">user_workbench_rbg_priv.dna_rbg_extraction_internal.basescheme_mvp3_jul2026_merchant_inflow</span>
+    <div class="section-label">Downstream (WRITE)</div>
+    <span class="table-tag downstream">fin_bf_rah.rbg_d_loyalty_bs_2026_customer_daily_mvp3</span>
+  </div>
+
+  <!-- NB6 -->
+  <div class="notebook-card">
+    <div class="nb-title">NB6: etl_funnel <span class="write-mode">DELETE+INSERT</span></div>
+    <div style="font-size:11px;color:#555;margin-bottom:8px;">Funnel fact: aggregates dim table by bucket/group for dashboard consumption</div>
+    <div class="section-label">Upstream (READ) &mdash; Internal from NB4</div>
+    <span class="table-tag internal">fin_bf_rah.rbg_d_loyalty_bs_2026_customer_daily_mvp3</span>
+    <div class="section-label">Upstream (READ) &mdash; Internal from NB2</div>
+    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_payment_daily</span>
+    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_bill_payment_daily</span>
+    <span class="table-tag internal">fin_bf_rah.stg_loyalty_bs_2026_qr_merchant_daily</span>
+    <div class="section-label">Downstream (WRITE)</div>
+    <span class="table-tag downstream">fin_bf_rah.rbg_f_funnel_mvp3</span>
+  </div>
+
+  <!-- NB8 -->
+  <div class="notebook-card">
+    <div class="nb-title">NB8: final_output <span class="write-mode">DELETE+INSERT</span></div>
+    <div style="font-size:11px;color:#555;margin-bottom:8px;">PBI-ready fact: pivots dim table into 24 view_mode configs for dashboard</div>
+    <div class="section-label">Upstream (READ) &mdash; Internal from NB4</div>
+    <span class="table-tag internal">fin_bf_rah.rbg_d_loyalty_bs_2026_customer_daily_mvp3</span>
+    <div class="section-label">Upstream (READ) &mdash; Internal from NB6</div>
+    <span class="table-tag internal">fin_bf_rah.rbg_f_funnel_mvp3</span>
+    <div class="section-label">Downstream (WRITE)</div>
+    <span class="table-tag downstream">fin_bf_rah.rbg_f_loyalty_mvp3</span>
+  </div>
+
+</div>
+
+<script>
+let activeFilter = null;
+function toggleFilter(el) {
+  const filter = el.dataset.filter;
+  const items = document.querySelectorAll('.legend-item');
+  const tags = document.querySelectorAll('.table-tag');
+  if (activeFilter === filter) {
+    activeFilter = null;
+    items.forEach(i => i.classList.remove('active'));
+    tags.forEach(t => { t.classList.remove('dimmed'); t.classList.remove('highlighted'); });
+    document.getElementById('filterHint').textContent = '';
+  } else {
+    activeFilter = filter;
+    items.forEach(i => i.classList.toggle('active', i.dataset.filter === filter));
+    tags.forEach(t => {
+      if (t.classList.contains(filter)) { t.classList.remove('dimmed'); t.classList.add('highlighted'); }
+      else { t.classList.add('dimmed'); t.classList.remove('highlighted'); }
+    });
+    document.getElementById('filterHint').textContent = 'Showing: ' + filter.replace('-', ' ');
+  }
+}
+</script>
+</body>
+</html>
